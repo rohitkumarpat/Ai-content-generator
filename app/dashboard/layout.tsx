@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import SideNav from "./_components/SideNav";
+import Header from "./_components/Header";
 
 
 const geistSans = Geist({
@@ -27,10 +28,18 @@ export default function RootLayout({
   return (
      <ClerkProvider>
     <html lang="en">
-      <body 
+      <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="">
+          <div className="hidden md:block md:w-64 fixed">
+            <SideNav />
+          </div>
+          <div className="md:ml-64"><Header /></div>
+          <div className="md:ml-64">
+              {children}
+          </div>
+        </div>
       </body>
     </html>
     </ClerkProvider>
