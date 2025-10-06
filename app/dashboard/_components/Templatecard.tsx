@@ -4,9 +4,20 @@ import React from "react"
 import { Template } from "./templateslist"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import  Link  from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Templatecard(item: Template) {
+
+  const router=useRouter();
+  
+  function movetoanother() {
+    router.push(`dashboard/content/${item.slug}`);
+  }
+
   return (
+
+
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.97 }}
@@ -38,9 +49,10 @@ export default function Templatecard(item: Template) {
       </p>
 
       {/* Button */}
-      <button className="mt-3 px-4 py-2 rounded-lg bg-white text-purple-700 font-semibold hover:bg-purple-100 transition">
+      <button onClick={movetoanother}
+      className="mt-3 px-4 py-2 rounded-lg bg-white text-purple-700 font-semibold hover:bg-purple-100 transition">
         Try Now
       </button>
-    </motion.div>
+    </motion.div> 
   )
 }

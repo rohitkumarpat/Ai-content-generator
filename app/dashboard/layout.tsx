@@ -36,7 +36,7 @@ export default function RootLayout({
             <SideNav />
           </div>
           <div className="md:ml-64"><Header /></div>
-          <div className="md:ml-64">
+          <div className="md:ml-64 bg-slate-200 min-h-screen">
               {children}
           </div>
         </div>

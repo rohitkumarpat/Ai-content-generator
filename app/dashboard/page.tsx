@@ -1,16 +1,24 @@
-import React from 'react'
+"use client"
+
+import React, { useState } from 'react'
 import Searchsection from './_components/searchsection'
 import Templateslist from './_components/templateslist'
 
-
 function Dashboard() {
+  const [userinput, setuserinput] = useState("")
+
   return (
     <div>
-       {/*search section */}
-       <Searchsection />
+      {/* Search section */}
+      <Searchsection 
+        onwrite={(value: string) => {
+          setuserinput(value)
+          console.log(value)
+        }}
+      />
 
-       {/* template list section */}
-       <Templateslist />
+      {/* Template list section */}
+      <Templateslist passingchild={userinput} />
     </div>
   )
 }

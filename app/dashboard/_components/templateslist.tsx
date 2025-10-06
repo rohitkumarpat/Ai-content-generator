@@ -19,16 +19,32 @@ export interface Template {
   form?: Form[]
 }
 
-export default function Templateslist() {
+
+interface TemplateslistProps {
+  passingchild: string
+}
+
+export default function Templateslist({ passingchild }: TemplateslistProps) {
+  
+  const filteredTemplates = Templates.filter((item) =>
+    item.name.toLowerCase().includes(passingchild.toLowerCase()) ||
+    item.category.toLowerCase().includes(passingchild.toLowerCase())
+  )
+
   return (
-      <div className="p-6">
+    
+    <div className="p-6">
       <h2 className="text-3xl font-bold mb-6 text-center">All Templates</h2>
 
       {/* Responsive grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {Templates.map((item: Template, index: number) => (
-          <Templatecard key={index} {...item} />
-        ))}
+        {filteredTemplates.length > 0 ? (
+          filteredTemplates.map((item: Template, index: number) => (
+            <Templatecard key={index} {...item} />
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">No templates found.</p>
+        )}
       </div>
     </div>
   ) 
