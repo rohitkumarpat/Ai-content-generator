@@ -1,29 +1,76 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import { Button } from '@/components/ui/button';
-import { Copy } from 'lucide-react';
+import { Check, Copy } from 'lucide-react';
 
-interface props{
-  loading:boolean,
-  content:string
+interface Props {
+  loading: boolean;
+  content: string;
 }
 
-function Outputsection({loading,content}:props) {
+function OutputSection({ loading, content }: Props) {
+  const editorRef = useRef<Editor | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (editorRef.current) {
+       const editorInstance = editorRef.current.getInstance();
+      editorInstance.setMarkdown(content || '');
+    }
+  }, [content]);
+
+  const handleCopy = async () => {
+    if (!editorRef.current) return;
+    try {
+        const editorInstance = editorRef.current.getInstance();
+      const plainText = editorInstance.getMarkdown();
+
+      await navigator.clipboard.writeText(plainText); 
+      setCopied(true);
+   
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   return (
-    <div className='bg-white shadow-lg border '>
-      <div className='flex justify-between items-center p-5'>
-        <h2 className='text-2xl font-bold text-purple-700'>Your Result</h2>
-         <Button className='bg-purple-600 hover:bg-purple-700'><Copy />copy</Button>
+    <div className="bg-white shadow-lg border rounded-lg">
+      <div className="flex justify-between items-center p-5">
+        <h2 className="text-2xl font-bold text-purple-700">Your Result</h2>
+        <Button
+          onClick={handleCopy}
+          disabled={!content}
+          className={`flex items-center gap-2 ${
+            copied
+              ? 'bg-green-600 hover:bg-green-700'
+              : 'bg-purple-600 hover:bg-purple-700'
+          } text-white`}
+        >
+          {copied ? (
+            <>
+              <Check className="h-4 w-4" />
+              Copied!
+            </>
+          ) : (
+            <>
+              <Copy className="h-4 w-4" />
+              Copy
+            </>
+          )}
+        </Button>
       </div>
-       <Editor
-    initialValue="hello your result appear here!"
-    height="450px"
-    initialEditType="wysiwyg"
-    useCommandShortcut={true}
-  />
+
+      <Editor
+        ref={editorRef}
+        initialValue="Hello, your result will appear here!"
+        height="450px"
+        initialEditType="wysiwyg"
+        useCommandShortcut={true}
+      />
     </div>
-  )
+  );
 }
 
-export default Outputsection
+export default OutputSection;

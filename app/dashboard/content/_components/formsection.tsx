@@ -1,30 +1,39 @@
 import Templates from '@/app/(data)/Templates'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { LoaderCircle } from 'lucide-react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
 interface Props {
   slugvalue: string
-  userforminput: (data: any) => void
+  userforminput: (data: any) => Promise<void> | void // userforminput can be async
 }
 
 function Formsection({ slugvalue, userforminput }: Props) {
   const template = Templates.find((item) => item.slug === slugvalue)
-  const [formData, setFormData] = useState<{ [key: string]: string }>({});
+  const [formData, setFormData] = useState<{ [key: string]: string }>({})
+  const [loading, setLoading] = useState(false)
 
   if (!template)
-    return <p className="text-red-500 text-center mt-10">Template not found.</p>;
+    return <p className="text-red-500 text-center mt-10">Template not found.</p>
 
-  // 🧠 handle change dynamically
+  // 🧠 handle input change dynamically
   const handleChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    userforminput(formData); // pass full object
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      setLoading(true)
+      await userforminput(formData) // wait for parent async call
+    } catch (err) {
+      console.error('Error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="p-6 bg-white rounded-xl shadow-md border max-w-3xl mx-auto">
@@ -61,13 +70,19 @@ function Formsection({ slugvalue, userforminput }: Props) {
 
         <button
           type="submit"
-          className="py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg"
+          disabled={loading}
+          className={`py-2 px-4 font-semibold rounded-lg flex items-center justify-center gap-2
+            ${loading
+              ? 'bg-purple-400 cursor-not-allowed'
+              : 'bg-purple-600 hover:bg-purple-700 text-white'}
+          `}
         >
-          Generate Content
+          {loading && <LoaderCircle className="animate-spin h-5 w-5" />}
+          {loading ? 'Generating...' : 'Generate Content'}
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default Formsection;
+export default Formsection

@@ -29,16 +29,16 @@ export default function Contentitemslug() {
       const res = await fetch('/api/ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({message:prompt }),
       });
 
       const data = await res.json();
-      setOutput(data.result || 'No output generated.');
+      setOutput(data.reply || 'No output generated.');
       console.log(output);
 
     } catch (err) {
       console.error(err);
-      setOutput('Error generating content.');
+      setOutput('Error generating content.'); 
     } finally {
       setLoading(false);
     }
