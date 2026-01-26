@@ -1,0 +1,31 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  clerkid   String    @unique
+  email     String    @unique
+  name      String?
+  createdAt DateTime @default(now())
+  aiOutputs    AiOutput[] 
+}
+
+model AiOutput {
+  id         Int      @id @default(autoincrement())
+  formData   String
+  aiResponse String
+  slugname   String
+  createdAt  DateTime @default(now())
+
+  clerkid    String
+  user       User     @relation(fields: [clerkid], references: [clerkid], onDelete: Cascade)
+
+  @@index([clerkid])
+}

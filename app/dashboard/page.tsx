@@ -1,26 +1,37 @@
-"use client"
+import { currentUser } from "@clerk/nextjs/server";
+import DashboardClient from "./dashboardclient";
+import { prismaclient } from "@/lib/db";
 
-import React, { useState } from 'react'
-import Searchsection from './_components/searchsection'
-import Templateslist from './_components/templateslist'
+export default async function Dashboard() {
+  const user = await currentUser();
 
-function Dashboard() {
-  const [userinput, setuserinput] = useState("")
+  if (!user) return null;
 
-  return (
-    <div>
-      {/* Search section */}
-      <Searchsection 
-        onwrite={(value: string) => {
-          setuserinput(value)
-          console.log(value)
-        }}
-      />
+  const email = user.emailAddresses[0]?.emailAddress ?? "";
+  const name = `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim();
 
-      {/* Template list section */}
-      <Templateslist passingchild={userinput} />
-    </div>
-  )
+ 
+  const userdetail = await prismaclient.user.upsert({
+    where: {
+      clerkid: user.id,
+    },
+    update: {
+      email,
+      name,
+    },
+    create: {
+      clerkid: user.id,
+      email,
+      name,
+    },
+  });
+
+ 
+  const safeUser = {
+    id: userdetail.clerkid,
+    email: userdetail.email,
+    firstName: userdetail.name || " ",
+  };
+
+  return <DashboardClient user={safeUser} />;
 }
-
-export default Dashboard
