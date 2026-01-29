@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import SideNav from "./_components/SideNav";
 import Header from "./_components/Header";
+import { CreditsProvider } from "../contexts/CreditsContext";
 
 
 const geistSans = Geist({
@@ -26,6 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+        <CreditsProvider>
      <ClerkProvider>
     <html lang="en">
       <body
@@ -43,5 +45,6 @@ export default function RootLayout({
       </body>
     </html>
     </ClerkProvider>
+    </CreditsProvider>
   );
 }

@@ -23,3 +23,31 @@ export async function POST(req: Request) {
 
   return NextResponse.json(saved);
 }
+
+
+
+export async function GET() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+  const historyinfo = await prismaclient.aiOutput.findMany({
+    where: {
+      clerkid: userId, 
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return NextResponse.json(historyinfo);
+}
+
+
+
+

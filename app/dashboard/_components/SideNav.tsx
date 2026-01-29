@@ -1,10 +1,11 @@
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { FileClock, Settings, WalletCards, Home as HomeIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import UsageTrack from './UsageTrack';
 
 function SideNav() {
   const Menulist = [
@@ -17,7 +18,7 @@ function SideNav() {
   const path = usePathname();
 
   return (
-    <div className="h-screen border p-5 shadow-md flex flex-col">
+    <div className="h-screen relative border p-5 shadow-md flex flex-col">
       <div className="flex justify-center mb-10 border-b-2 pb-2">
         <Image src="/logo2.svg" alt="logo" width={140} height={140} />
       </div>
@@ -39,6 +40,9 @@ function SideNav() {
           );
         })}
       </div>
+       <div className='absolute bottom-10 left-0  w-full'><UsageTrack
+                />
+</div>
     </div>
   );
 }
