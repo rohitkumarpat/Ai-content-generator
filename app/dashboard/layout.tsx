@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import SideNav from "./_components/SideNav";
 import Header from "./_components/Header";
 import { CreditsProvider } from "../contexts/CreditsContext";
+import Script from "next/script";
 
 
 const geistSans = Geist({
@@ -40,6 +41,10 @@ export default function RootLayout({
           <div className="md:ml-64"><Header /></div>
           <div className="md:ml-64 bg-slate-200 min-h-screen">
               {children}
+             <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="afterInteractive"
+      />
           </div>
         </div>
       </body>

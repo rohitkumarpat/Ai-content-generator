@@ -84,7 +84,7 @@ export default function Contentitemslug() {
               </Link>
             </Button>
             <Button className="w-full bg-green-500 hover:bg-green-600">
-              <Link href="/upgrade" className="w-full block">
+              <Link href="/dashboard/billing" className="w-full block">
                 Upgrade Plan
               </Link>
             </Button>

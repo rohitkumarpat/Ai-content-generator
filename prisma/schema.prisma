@@ -9,13 +9,19 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  clerkid   String    @unique
-  email     String    @unique
-  name      String?
-  createdAt DateTime @default(now())
-  aiOutputs    AiOutput[] 
+  id                      Int      @id @default(autoincrement())
+  clerkid                 String    @unique
+  email                   String    @unique
+  name                    String?
+  createdAt               DateTime @default(now())
+  plan                    Plan                 @default(FREE)
+  subscriptionStatus      SubscriptionStatus   @default(INACTIVE)
+  subscriptionId          String?
+  paymentId               String?
+  aiOutputs               AiOutput[] 
 }
+
+
 
 model AiOutput {
   id         Int      @id @default(autoincrement())
@@ -28,4 +34,19 @@ model AiOutput {
   user       User     @relation(fields: [clerkid], references: [clerkid], onDelete: Cascade)
 
   @@index([clerkid])
+}
+
+
+
+enum Plan {
+  FREE
+  PRO
+}
+
+
+
+enum SubscriptionStatus {
+  INACTIVE
+  ACTIVE
+  CANCELLED
 }
