@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚀 AI Content Generator
 
-## Getting Started
+An AI-powered content generation platform that helps users create high-quality text content quickly and efficiently using Google Gemini AI.
+The app supports authentication, credit-based usage, and subscription plans with secure payments.
 
-First, run the development server:
+🌟 Features
 
-```bash
+✨ AI-generated content using Google Gemini API
+
+🔐 Secure authentication with Clerk
+
+💳 Subscription & payments via Razorpay
+
+📊 Credit-based usage tracking
+
+📝 Rich text editor (TipTap-style editing experience)
+
+📜 Content history tracking
+
+⚡ Fast & scalable with Next.js App Router
+
+🗄️ PostgreSQL database powered by Prisma
+
+🌍 Deployed on Vercel
+
+🛠️ Tech Stack
+
+Frontend: Next.js 15, React, Tailwind CSS
+
+Backend: Next.js API Routes
+
+Authentication: Clerk
+
+AI: Google Gemini API
+
+Payments: Razorpay
+
+Database: PostgreSQL (Neon)
+
+ORM: Prisma
+
+Deployment: Vercel
+
+  <img width="2880" height="1704" alt="Screenshot 2026-02-02 004038" src="https://github.com/user-attachments/assets/d7b3c279-8e37-4941-9dc5-a48a2b2dc4ad" />
+
+  <img width="2880" height="1704" alt="Screenshot 2026-02-02 004057" src="https://github.com/user-attachments/assets/d6473ceb-7a2e-4b39-a84a-af841eda5708" />
+  
+  <img width="2880" height="1704" alt="Screenshot 2026-02-02 004110" src="https://github.com/user-attachments/assets/021b2cca-7e7e-4617-8d01-85f32242fb1c" />
+  
+  <img width="2880" height="1704" alt="Screenshot 2026-02-02 004127" src="https://github.com/user-attachments/assets/79fedffd-dd37-4808-a4aa-73c05a03d43c" />
+
+⚙️ Environment Variables
+
+Create a .env file and add the following:
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+
+GEMINI_API_KEY=
+
+DATABASE_URL=
+
+SUBSCRIPTION_PLAN_ID=
+
+RAZORPAY_ID=
+RAZORPAY_SECRET=
+NEXT_PUBLIC_RAZORPAY_KEY_ID=
+
+NEXT_PUBLIC_PHONE_NUMBER=
+NEXT_PUBLIC_EMAIL=
+
+
+⚠️ Never commit .env files to GitHub.
+
+🚀 Getting Started (Local Setup)
+1️⃣ Clone the repository
+git clone https://github.com/your-username/ai-content-generator.git
+cd ai-content-generator
+
+2️⃣ Install dependencies
+npm install
+
+3️⃣ Generate Prisma Client
+npx prisma generate
+
+4️⃣ Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit 👉 http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+💳 Subscription & Credits
 
-## Learn More
+Free Plan: Limited AI usage
 
-To learn more about Next.js, take a look at the following resources:
+Pro Plan:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Unlimited AI content generation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Priority access
 
-## Deploy on Vercel
+Secure monthly billing via Razorpay
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+❓ Help & Support
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you face issues related to:
+
+Payment
+
+Subscription activation
+
+Credits not updating
+
+You can contact us via:
+
+📧 Email: support email provided in app
+
+💬 WhatsApp: Fast response support
+
+🔒 Security
+
+Uses latest patched Next.js version
+
+Secure API routes
+
+Environment variables protected
+
+Payment verification via Razorpay signatures
+
+📦 Deployment
+
+This project is deployed on Vercel with CI/CD enabled via GitHub.
+
+To deploy your own version:
+
+Fork the repository
+
+Connect it to Vercel
+
+Add environment variables
+
+Deploy 🚀
+
+🙌 Acknowledgements
+
+Google Gemini
+
+Clerk
+
+Razorpay
+
+Prisma
+
+Vercel
+
+Next.js Team
+
+👨‍💻 Author
+
+Rohit
+Computer Science Engineer
+Passionate about Full-Stack Development & AI-powered products
+
+⭐ Show Your Support
+
+If you like this project, please ⭐ the repository and share it!
+
+
+
+
