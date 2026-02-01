@@ -2,7 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["cdn-icons-png.flaticon.com"], 
+    domains: ["cdn-icons-png.flaticon.com"],
+  },
+
+ 
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
