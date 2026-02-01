@@ -1,82 +1,130 @@
-import React, { useEffect, useRef, useState } from "react";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Heading from "@tiptap/extension-heading";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import CodeBlock from "@tiptap/extension-code-block";
+import Blockquote from "@tiptap/extension-blockquote";
 import { Button } from "@/components/ui/button";
-import { Check, Copy } from "lucide-react";
+import {
+  Bold,
+  Italic,
+  List,
+  ListOrdered,
+  Code,
+  Quote,
+  Undo,
+  Redo,
+  Copy,
+} from "lucide-react";
 
 interface Props {
   loading: boolean;
   content: string;
 }
 
-function OutputSection({ loading, content }: Props) {
-  const editorRef = useRef<Editor | null>(null);
+export default function OutputSection({ loading, content }: Props) {
   const [copied, setCopied] = useState(false);
 
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Heading.configure({ levels: [1, 2, 3] }),
+      BulletList,
+      OrderedList,
+      CodeBlock,
+      Blockquote,
+    ],
+    content: "",
+    editable: true,
+    immediatelyRender: false,
+  });
+
   useEffect(() => {
-    if (!editorRef.current) return;
-
-    const editorInstance = editorRef.current.getInstance();
-
-    // ✅ IMPORTANT: Use setHTML for HTML content
-    editorInstance.setHTML(content || "");
-  }, [content]);
-
-  const handleCopy = async () => {
-    if (!editorRef.current) return;
-
-    try {
-      const editorInstance = editorRef.current.getInstance();
-
-      // Copy rendered HTML
-      const html = editorInstance.getHTML();
-      await navigator.clipboard.writeText(html);
-
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
+    if (editor && content) {
+      editor.commands.setContent(content);
     }
+  }, [editor, content]);
+
+  const copyHTML = async () => {
+    if (!editor) return;
+    await navigator.clipboard.writeText(editor.getHTML());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
+  if (!editor) return null;
+
   return (
-    <div className="bg-white shadow-lg border rounded-lg">
-      <div className="flex justify-between items-center p-5">
-        <h2 className="text-2xl font-bold text-purple-700">Your Result</h2>
+    <div className="bg-white border rounded-lg shadow-md">
+      {/* TOOLBAR */}
+      <div className="flex flex-wrap gap-1 p-2 border-b bg-gray-50">
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleBold().run()}>
+          <Bold size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleItalic().run()}>
+          <Italic size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>
+          H1
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
+          H2
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleBulletList().run()}>
+          <List size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleOrderedList().run()}>
+          <ListOrdered size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleCodeBlock().run()}>
+          <Code size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleBlockquote().run()}>
+          <Quote size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().undo().run()}>
+          <Undo size={16} />
+        </Button>
+
+        <Button variant="outline" size="sm" onClick={() => editor.chain().focus().redo().run()}>
+          <Redo size={16} />
+        </Button>
 
         <Button
-          onClick={handleCopy}
-          disabled={!content}
-          className={`flex items-center gap-2 ${
-            copied
-              ? "bg-green-600 hover:bg-green-700"
-              : "bg-purple-600 hover:bg-purple-700"
-          } text-white`}
+          variant="outline"
+          size="sm"
+          onClick={copyHTML}
+          className="ml-auto"
         >
-          {copied ? (
-            <>
-              <Check className="h-4 w-4" />
-              Copied!
-            </>
-          ) : (
-            <>
-              <Copy className="h-4 w-4" />
-              Copy HTML
-            </>
-          )}
+          {copied ? "Copied" : <Copy size={16} />}
         </Button>
       </div>
 
-      <Editor
-        ref={editorRef}
-        initialValue="Your AI-generated content will appear here..."
-        height="450px"
-        initialEditType="wysiwyg" // ✅ required for HTML
-        useCommandShortcut={true}
-        hideModeSwitch={true}
-      />
+      {/* EDITOR */}
+      <div className="p-6 min-h-[450px]">
+        {loading ? (
+          <p className="text-gray-500 animate-pulse">
+            Generating content…
+          </p>
+        ) : (
+          <EditorContent
+            editor={editor}
+            className="prose max-w-none focus:outline-none min-h-[400px]"
+          />
+        )}
+      </div>
     </div>
   );
 }
-
-export default OutputSection;
