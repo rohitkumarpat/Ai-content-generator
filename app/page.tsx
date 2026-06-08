@@ -30,8 +30,22 @@ export default function HomePage() {
 
         <div className="flex justify-center gap-4 flex-wrap">
           <Link
-            href="/dashboard"
+            href="/sign-in"
+            className="px-8 py-3 rounded-xl border border-indigo-600 text-indigo-600 font-semibold hover:bg-indigo-50 transition"
+          >
+            Sign In
+          </Link>
+
+          <Link
+            href="/sign-up"
             className="px-8 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
+          >
+            Sign Up
+          </Link>
+
+          <Link
+            href="/dashboard"
+            className="px-8 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition"
           >
             Start Writing Free
           </Link>
@@ -127,7 +141,7 @@ export default function HomePage() {
         </div>
       </section>
 
-       <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <FAQ />
       </section>
 

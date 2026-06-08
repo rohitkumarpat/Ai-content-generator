@@ -145,7 +145,7 @@ export default function Contentitemslug() {
         </Button>
       </Link>
 
-      <div className="grid md:grid-cols-2 gap-10 p-8">
+      <div className="grid md:grid-cols-2 gap-10 p-8 items-start">
         <Formsection
           slugvalue={params.slug as string}
           userforminput={Generateaicontent}

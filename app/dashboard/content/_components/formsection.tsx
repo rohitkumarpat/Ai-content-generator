@@ -36,7 +36,7 @@ function Formsection({ slugvalue, userforminput }: Props) {
   }
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md border max-w-3xl mx-auto">
+    <div className="p-6 bg-white rounded-xl shadow-md border max-w-3xl mx-auto h-[500px]">
       <div className="flex items-center space-x-4 mb-6">
         <Image src={template.icon} alt="icon" width={70} height={70} />
         <div>

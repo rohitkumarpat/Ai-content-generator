@@ -59,7 +59,7 @@ export default function OutputSection({ loading, content }: Props) {
   if (!editor) return null;
 
   return (
-    <div className="bg-white border rounded-lg shadow-md">
+   <div className="bg-white border rounded-lg shadow-md h-[500px] flex flex-col">
       {/* TOOLBAR */}
       <div className="flex flex-wrap gap-1 p-2 border-b bg-gray-50">
         <Button variant="outline" size="sm" onClick={() => editor.chain().focus().toggleBold().run()}>
@@ -113,7 +113,7 @@ export default function OutputSection({ loading, content }: Props) {
       </div>
 
       {/* EDITOR */}
-      <div className="p-6 min-h-[450px]">
+      <div className="p-6 flex-1 overflow-y-auto">
         {loading ? (
           <p className="text-gray-500 animate-pulse">
             Generating content…

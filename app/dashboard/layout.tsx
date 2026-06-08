@@ -28,28 +28,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-        <CreditsProvider>
-     <ClerkProvider>
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="">
-          <div className="hidden md:block md:w-64 fixed">
-            <SideNav />
-          </div>
-          <div className="md:ml-64"><Header /></div>
-          <div className="md:ml-64 bg-slate-200 min-h-screen">
-              {children}
-             <Script
-        src="https://checkout.razorpay.com/v1/checkout.js"
-        strategy="afterInteractive"
-      />
-          </div>
-        </div>
-      </body>
-    </html>
-    </ClerkProvider>
+    <CreditsProvider>
+      <ClerkProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <div className="">
+              <div className="md:w-64 md:fixed">
+                <SideNav />
+              </div>
+              <div className="md:ml-64"><Header /></div>
+              <div className="md:ml-64 bg-slate-200 min-h-screen">
+                {children}
+                <Script
+                  src="https://checkout.razorpay.com/v1/checkout.js"
+                  strategy="afterInteractive"
+                />
+              </div>
+            </div>
+          </body>
+        </html>
+      </ClerkProvider>
     </CreditsProvider>
   );
 }
