@@ -2,14 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import {
-  FileClock,
-  Settings,
-  WalletCards,
-  Home as HomeIcon,
-  LogOut,
-  HelpCircle,
-} from "lucide-react";
+import { FileClock, Settings, WalletCards, Home as HomeIcon, LogOut, HelpCircle, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import UsageTrack from "./UsageTrack";
@@ -26,6 +19,11 @@ function SideNav() {
       name: "history",
       icon: FileClock,
       path: "/dashboard/history",
+    },
+    {
+      name: "knowledge",
+      icon: BookOpen,
+      path: "/dashboard/knowledge",
     },
     {
       name: "billing",
@@ -66,8 +64,8 @@ function SideNav() {
                 key={index}
                 href={menu.path}
                 className={`flex items-center gap-2 whitespace-nowrap px-3 py-2 rounded-lg transition ${path === menu.path
-                    ? "bg-blue-500 text-white"
-                    : "bg-gray-100 hover:bg-blue-100"
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-100 hover:bg-blue-100"
                   }`}
               >
                 <Icon className="w-4 h-4" />
@@ -90,8 +88,8 @@ function SideNav() {
               key={index}
               href={menu.path}
               className={`flex items-center gap-3 p-3 rounded-lg transition ${path === menu.path
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-blue-400 hover:text-white"
+                ? "bg-blue-500 text-white"
+                : "hover:bg-blue-400 hover:text-white"
                 }`}
             >
               <Icon className="w-5 h-5" />
