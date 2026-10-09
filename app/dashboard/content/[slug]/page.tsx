@@ -14,11 +14,13 @@ export default function Contentitemslug() {
   const params = useParams();
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [useKnowledge, setUseKnowledge] = useState(true);
+  const [sources, setSources] = useState<any[]>([]);
 
   const { incrementCredits, usedCredits, totalCredits, isPro } = useCredits();
 
   const Generateaicontent = async (userInput: any) => {
-  
+
     if (!isPro && usedCredits >= (totalCredits ?? 0)) {
       alert(
         `You've used all ${totalCredits} credits! Please upgrade your plan to continue.`
@@ -41,14 +43,20 @@ export default function Contentitemslug() {
       const res = await fetch("/api/ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: prompt }),
+        body: JSON.stringify({
+          message: prompt,
+          templatePrompt: template.aiPrompt,
+          userInput,
+          useKnowledge,
+          slug: params.slug,
+        }),
       });
 
       const data = await res.json();
       const aiText = data.reply || "No output generated.";
 
       setOutput(aiText);
-
+      setSources(data.sources ?? []);
       await fetch("/api/ai-output", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -139,11 +147,34 @@ export default function Contentitemslug() {
         </div>
       )}
 
-      <Link href="/dashboard">
-        <Button className="bg-purple-600 hover:bg-purple-700 rounded-md mb-6">
-          <ArrowLeft /> Back
-        </Button>
-      </Link>
+      <div className="flex items-center justify-between pr-8 mb-6">
+        <Link href="/dashboard">
+          <Button className="bg-purple-600 hover:bg-purple-700 rounded-md ml-2">
+            <ArrowLeft /> Back
+          </Button>
+        </Link>
+
+        <button
+          type="button"
+          role="switch"
+          aria-checked={useKnowledge}
+          onClick={() => setUseKnowledge((v) => !v)}
+          className="flex items-center gap-3 rounded-full border bg-white px-4 py-2 shadow-sm transition hover:shadow"
+        >
+          <span className="text-sm font-medium text-gray-700">
+            Use my brand knowledge
+          </span>
+          <span
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${useKnowledge ? "bg-purple-600" : "bg-gray-300"
+              }`}
+          >
+            <span
+              className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${useKnowledge ? "translate-x-5" : "translate-x-0.5"
+                }`}
+            />
+          </span>
+        </button>
+      </div>
 
       <div className="grid md:grid-cols-2 gap-10 p-8 items-start">
         <Formsection
@@ -152,6 +183,20 @@ export default function Contentitemslug() {
         />
         <Outputsection loading={loading} content={output} />
       </div>
+
+      {sources.length > 0 && (
+        <div className="px-8 pb-8">
+          <h3 className="font-semibold mb-2">Sources used</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            {sources.map((s) => (
+              <li key={s.n} className="border rounded-md p-3">
+                <span className="font-medium">[{s.n}] {s.title}</span>
+                <p className="mt-1">{s.snippet}…</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
