@@ -10,6 +10,12 @@ import Link from "next/link";
 import Templates from "@/app/(data)/Templates";
 import { useCredits } from "@/app/contexts/CreditsContext";
 
+const FORMAT_RULE =
+  "\n\nOutput format: respond with clean HTML only, using tags like <h2>, <p>, <ul><li>, <strong>, <em>, and <pre><code> for code. Do not return JSON or markdown, and do not wrap the answer in code fences.";
+
+const cleanOutput = (t: string) =>
+  t.replace(/^```(?:html)?\s*/i, "").replace(/```\s*$/, "").trim();
+
 export default function Contentitemslug() {
   const params = useParams();
   const [output, setOutput] = useState("");
@@ -36,16 +42,14 @@ export default function Contentitemslug() {
     try {
       setLoading(true);
 
-      const prompt = `${template.aiPrompt}\nUser Input: ${JSON.stringify(
-        userInput
-      )}`;
+      const prompt = `${template.aiPrompt}${FORMAT_RULE}\nUser Input: ${JSON.stringify(userInput)}`;
 
       const res = await fetch("/api/ai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: prompt,
-          templatePrompt: template.aiPrompt,
+          templatePrompt: template.aiPrompt + FORMAT_RULE,
           userInput,
           useKnowledge,
           slug: params.slug,
@@ -53,7 +57,7 @@ export default function Contentitemslug() {
       });
 
       const data = await res.json();
-      const aiText = data.reply || "No output generated.";
+      const aiText = cleanOutput(data.reply || "No output generated.");
 
       setOutput(aiText);
       setSources(data.sources ?? []);
