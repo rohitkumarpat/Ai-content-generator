@@ -2,10 +2,10 @@
 
 An AI content generation platform with **18 reusable writing tools** (blogs, YouTube, Instagram, writing help, code, marketing) built on **Next.js and Google Gemini**. Its standout feature is a **Brand Knowledge Base**: users upload their own documents, and the AI writes using their real facts and tone, showing which sources it used.
 
-🔗 **Live demo:** https://YOUR-APP.vercel.app
-🧠 **RAG service (Python):** https://github.com/YOUR-USERNAME/rag-service
+🔗 **Live demo:** https://ai-content-generator-mu-three.vercel.app/
+🧠 **RAG service (Python):**https://github.com/rohitkumarpat/rag-service
 
-![Landing page](docs/landing.png)
+
 
 ## ✨ Features
 
