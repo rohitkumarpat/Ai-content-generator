@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowRight, BookOpen, Camera, Check, Code2, Database, FileUp, History,
-  Lock, PenTool, Quote, Search, ShieldCheck, Sparkles, Type, Video, Wand2, X, Zap,
+  ArrowRight, BookOpen, Briefcase, Camera, Check, Code2, FileUp, History,
+  Lock, PenTool, Sparkles, Type, Video, Wand2, X, Zap, Eye,
 } from "lucide-react";
 import FAQ from "./dashboard/_components/FAQ";
 
 const NAV = [
-  { label: "Knowledge Base", href: "#knowledge" },
+  { label: "Two ways to write", href: "#modes" },
   { label: "How it works", href: "#how" },
   { label: "Tools", href: "#tools" },
   { label: "Pricing", href: "#pricing" },
@@ -17,11 +17,11 @@ const NAV = [
 ];
 
 const TOOLS = [
-  { icon: PenTool, title: "Blog", desc: "Titles, topic ideas and full articles with citations.", count: 3 },
-  { icon: Video, title: "YouTube", desc: "SEO titles, descriptions and tags.", count: 3 },
+  { icon: PenTool, title: "Blogs", desc: "Titles, topic ideas and full articles.", count: 3 },
+  { icon: Video, title: "YouTube", desc: "Catchy titles, descriptions and tags.", count: 3 },
   { icon: Camera, title: "Instagram", desc: "Posts, hashtags and post ideas.", count: 3 },
-  { icon: Type, title: "Writing", desc: "Rewrite, improve, grammar check, add emoji.", count: 4 },
-  { icon: Code2, title: "Code", desc: "Write, explain and debug code.", count: 3 },
+  { icon: Type, title: "Writing help", desc: "Rewrite, improve, fix grammar, add emoji.", count: 4 },
+  { icon: Code2, title: "Code", desc: "Write, explain and fix code.", count: 3 },
   { icon: Wand2, title: "Marketing", desc: "Taglines and product descriptions.", count: 2 },
 ];
 
@@ -55,30 +55,30 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-3 py-1 text-xs font-medium text-indigo-700">
-              <Sparkles className="h-3.5 w-3.5" /> New: Brand Knowledge Base powered by RAG
+              <Sparkles className="h-3.5 w-3.5" /> New: teach the AI about your business
             </span>
             <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight md:text-6xl">
-              Content that sounds like <span className="text-indigo-600">your brand</span>, not generic AI
+              Write posts, titles and blogs in <span className="text-indigo-600">seconds</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-slate-600">
-              Upload your brand guidelines, product info or website once. Every tool, from Instagram posts to
-              blogs, then writes using your real facts and tone, and shows the sources it used.
+              Pick a tool, type a few words and get ready-to-use content. Want it to sound like your business?
+              Add your own info and the AI will use it. It&apos;s optional, and you choose every time.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/sign-up" className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 font-semibold text-white hover:bg-indigo-700 transition">
                 Start free <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href="#knowledge" className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 hover:bg-slate-50 transition">
+              <a href="#modes" className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 hover:bg-slate-50 transition">
                 See how it works
               </a>
             </div>
-            <p className="mt-4 text-sm text-slate-500">10 free generations. No credit card required.</p>
+            <p className="mt-4 text-sm text-slate-500">10 free generations. No credit card needed.</p>
           </Reveal>
 
           <Reveal delay={0.15}>
             <div className="rounded-2xl border bg-white p-5 shadow-xl">
               <div className="mb-4 flex items-center justify-between">
-                <span className="text-sm font-semibold">Instagram Post Generator</span>
+                <span className="text-sm font-semibold">Instagram Post</span>
                 <span className="flex items-center gap-2 rounded-full border px-3 py-1 text-xs text-slate-600">
                   Use my brand knowledge
                   <span className="relative inline-flex h-5 w-9 items-center rounded-full bg-indigo-600">
@@ -87,17 +87,17 @@ export default function HomePage() {
                 </span>
               </div>
               <div className="rounded-lg bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
-                Fresh out of the kiln 🏺 Our new handmade collection is here: warm, playful and made to be used every
-                day. Free shipping on orders above $50. <span className="text-indigo-600">#handmade #ceramics</span>
+                Fresh out of the kiln 🏺 Our handmade mugs are back, warm, playful and made for everyday. Free
+                shipping over $50. <span className="text-indigo-600">#handmade #ceramics</span>
               </div>
               <div className="mt-4">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Sources used</p>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Based on your info</p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-md border bg-white px-2.5 py-1 text-xs text-slate-600">[1] Brand voice guide</span>
-                  <span className="rounded-md border bg-white px-2.5 py-1 text-xs text-slate-600">[2] Shipping policy</span>
+                  <span className="rounded-md border bg-white px-2.5 py-1 text-xs text-slate-600">Brand voice guide</span>
+                  <span className="rounded-md border bg-white px-2.5 py-1 text-xs text-slate-600">Shipping policy</span>
                 </div>
               </div>
-              <p className="mt-4 text-right text-[11px] text-slate-400">Illustrative example</p>
+              <p className="mt-4 text-right text-[11px] text-slate-400">Example</p>
             </div>
           </Reveal>
         </div>
@@ -106,63 +106,50 @@ export default function HomePage() {
       {/* HIGHLIGHTS */}
       <section className="border-y bg-white">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-6 py-10 text-center md:grid-cols-4">
-          <Stat value="18" label="AI writing tools" />
-          <Stat value="3" label="Source types: PDF, text, URL" />
-          <Stat value="Private" label="Per-user knowledge isolation" />
-          <Stat value="Cited" label="Sources shown with every output" />
+          <Stat value="18" label="writing tools" />
+          <Stat value="3 ways" label="to add info: PDF, text or website link" />
+          <Stat value="Private" label="your info is only used for you" />
+          <Stat value="Clear" label="see which info was used" />
         </div>
       </section>
 
-      {/* RAG SPOTLIGHT */}
-      <section id="knowledge" className="bg-slate-950 py-24 text-white">
+      {/* TWO MODES */}
+      <section id="modes" className="bg-slate-950 py-24 text-white">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <p className="text-center text-sm font-semibold uppercase tracking-widest text-indigo-400">Brand Knowledge Base</p>
+            <p className="text-center text-sm font-semibold uppercase tracking-widest text-indigo-400">Two ways to write</p>
             <h2 className="mx-auto mt-3 max-w-3xl text-center text-3xl font-bold md:text-4xl">
-              Stop editing generic AI output. Teach it your brand once.
+              Quick and general, or personal to your business. You choose.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center text-slate-400">
-              Retrieval-Augmented Generation finds the most relevant parts of your own documents and gives them to the
-              AI before it writes, so the content uses your facts, not guesses.
+              Every tool has one switch: <span className="text-white">&quot;Use my brand knowledge&quot;</span>. Turn it off for
+              a general answer, or on to make the AI use the information you added about your business.
             </p>
           </Reveal>
 
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             <Reveal>
               <div className="h-full rounded-2xl border border-slate-800 bg-slate-900 p-6">
-                <div className="mb-4 flex items-center gap-2 text-slate-400"><X className="h-4 w-4 text-red-400" /><span className="text-sm font-semibold">Generic AI</span></div>
+                <div className="mb-1 flex items-center gap-2"><Zap className="h-4 w-4 text-amber-400" /><span className="font-semibold">Quick mode (switch off)</span></div>
+                <p className="mb-4 text-sm text-slate-400">No setup. Great for ideas, general content and trying things out.</p>
                 <p className="rounded-lg bg-slate-800/60 p-4 text-sm text-slate-300">
-                  Check out our amazing new products! High quality and great prices. Shop now and don&apos;t miss out! 🎉 #shopnow #sale
+                  Check out our amazing new products! High quality and great prices. Shop now! 🎉 #shopnow #sale
                 </p>
-                <p className="mt-3 text-xs text-slate-500">Vague, off-tone, no real product details.</p>
+                <p className="mt-3 text-xs text-slate-500">Good, but general. It doesn&apos;t know your products.</p>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
               <div className="h-full rounded-2xl border border-indigo-500/50 bg-indigo-950/40 p-6">
-                <div className="mb-4 flex items-center gap-2 text-indigo-300"><Check className="h-4 w-4 text-emerald-400" /><span className="text-sm font-semibold">With your Knowledge Base</span></div>
+                <div className="mb-1 flex items-center gap-2"><Briefcase className="h-4 w-4 text-indigo-300" /><span className="font-semibold">Personal mode (switch on)</span></div>
+                <p className="mb-4 text-sm text-slate-400">Uses the info you added: products, prices, tone of voice.</p>
                 <p className="rounded-lg bg-indigo-900/40 p-4 text-sm text-slate-100">
                   Fresh out of the kiln 🏺 Our handmade ceramic mugs are back, from $15, with free shipping over $50. #handmade #ceramicmugs
                 </p>
-                <p className="mt-3 text-xs text-indigo-300">Uses your product facts and tone. Sources: [1] Brand voice guide, [2] Price list.</p>
+                <p className="mt-3 text-xs text-indigo-300">Specific, on-brand, and shows which of your documents it used.</p>
               </div>
             </Reveal>
           </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {[
-              { icon: Database, t: "Your documents, indexed", d: "PDF, TXT, Markdown, pasted text or a website URL." },
-              { icon: Quote, t: "Cited sources", d: "See exactly which document each output came from." },
-              { icon: Lock, t: "Private by design", d: "Your knowledge is only ever searched for your account." },
-            ].map((f) => (
-              <Reveal key={f.t}>
-                <div className="rounded-xl border border-slate-800 p-5">
-                  <f.icon className="h-5 w-5 text-indigo-400" />
-                  <h3 className="mt-3 font-semibold">{f.t}</h3>
-                  <p className="mt-1 text-sm text-slate-400">{f.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <p className="mt-4 text-center text-xs text-slate-500">Examples for illustration.</p>
         </div>
       </section>
 
@@ -171,13 +158,13 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <h2 className="text-center text-3xl font-bold md:text-4xl">How it works</h2>
-            <p className="mx-auto mt-3 max-w-xl text-center text-slate-600">From upload to on-brand content in three steps.</p>
+            <p className="mx-auto mt-3 max-w-xl text-center text-slate-600">Start writing right away, or add your business info first.</p>
           </Reveal>
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {[
-              { icon: FileUp, t: "1. Add your sources", d: "Upload a PDF, paste text or add a URL on the Knowledge Base page." },
-              { icon: Search, t: "2. We find what matters", d: "Your content is split, embedded and searched by meaning when you generate." },
-              { icon: Sparkles, t: "3. Generate with context", d: "Pick any tool, switch on your knowledge base and get grounded output." },
+              { icon: Sparkles, t: "1. Pick a tool", d: "Choose from blogs, YouTube, Instagram, writing help, code and more." },
+              { icon: FileUp, t: "2. Add your info (optional)", d: "Upload a PDF, paste text or add a website link on the Brand Knowledge page. Do it once." },
+              { icon: Eye, t: "3. Generate and edit", d: "Get your content, edit it in the built-in editor, and see which of your info was used." },
             ].map((s, i) => (
               <Reveal key={s.t} delay={i * 0.1}>
                 <div className="h-full rounded-2xl border p-6 transition hover:shadow-md">
@@ -195,8 +182,8 @@ export default function HomePage() {
       <section id="tools" className="bg-slate-50 py-24">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <h2 className="text-center text-3xl font-bold md:text-4xl">18 tools, one workspace</h2>
-            <p className="mx-auto mt-3 max-w-xl text-center text-slate-600">Every tool works with or without your knowledge base.</p>
+            <h2 className="text-center text-3xl font-bold md:text-4xl">18 tools in one place</h2>
+            <p className="mx-auto mt-3 max-w-xl text-center text-slate-600">Every tool works in both quick mode and personal mode.</p>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TOOLS.map((t, i) => (
@@ -215,26 +202,14 @@ export default function HomePage() {
 
           <div className="mt-12 grid gap-4 md:grid-cols-4">
             {[
-              { icon: Zap, t: "Fast results" },
-              { icon: BookOpen, t: "Rich text editor" },
-              { icon: History, t: "Full generation history" },
-              { icon: ShieldCheck, t: "Secure sign-in" },
+              { icon: Zap, t: "Results in seconds" },
+              { icon: BookOpen, t: "Easy built-in editor" },
+              { icon: History, t: "All your past content saved" },
+              { icon: Lock, t: "Private and secure" },
             ].map((f) => (
               <div key={f.t} className="flex items-center gap-3 rounded-xl border bg-white px-4 py-3 text-sm font-medium">
                 <f.icon className="h-4 w-4 text-indigo-600" /> {f.t}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* BUILT WITH */}
-      <section className="py-14">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Built with</p>
-          <div className="mt-4 flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-medium text-slate-500">
-            {["Next.js", "FastAPI", "PostgreSQL + pgvector", "Google Gemini", "Clerk", "Razorpay"].map((s) => (
-              <span key={s}>{s}</span>
             ))}
           </div>
         </div>
@@ -256,8 +231,8 @@ export default function HomePage() {
 
       {/* FINAL CTA + FOOTER */}
       <section className="py-24 text-center">
-        <h2 className="text-3xl font-bold md:text-4xl">Write content that sounds like you</h2>
-        <p className="mt-3 text-slate-600">Add your brand knowledge and see the difference in your first generation.</p>
+        <h2 className="text-3xl font-bold md:text-4xl">Ready to write faster?</h2>
+        <p className="mt-3 text-slate-600">Start with a quick generation, add your business info whenever you like.</p>
         <Link href="/sign-up" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-8 py-3 font-semibold text-white hover:bg-indigo-700 transition">
           Get started free <ArrowRight className="h-4 w-4" />
         </Link>

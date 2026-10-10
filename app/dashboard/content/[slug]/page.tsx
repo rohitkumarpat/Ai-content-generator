@@ -57,6 +57,10 @@ export default function Contentitemslug() {
       });
 
       const data = await res.json();
+      if (!res.ok) {
+        setOutput(data.reply || "Something went wrong.");
+        return;
+      }
       const aiText = cleanOutput(data.reply || "No output generated.");
 
       setOutput(aiText);

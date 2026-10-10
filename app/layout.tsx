@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Content Generation | Brand-aware content with RAG",
+  title: "AI Content Generation | Write on-brand content in seconds",
   description:
-    "Generate on-brand content with AI. Upload your brand knowledge and every tool writes with your facts, tone and cited sources.",
+    "Create blogs, YouTube titles, Instagram posts and more with AI. Add your business info to get content that sounds like you.",
 };
 
 export default function RootLayout({

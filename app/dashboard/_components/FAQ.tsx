@@ -34,6 +34,16 @@ const faqData: FAQItem[] = [
     answer:
       "Yes. Your data is private and securely stored. We do not share your content with anyone.",
   },
+  {
+  question: "What does \"Use my brand knowledge\" do?",
+  answer:
+    "It lets the AI use information you added about your business, like product details, prices and your tone of voice. Turn it on for personalized content, or off for quick, general content.",
+},
+{
+  question: "What can I add to my brand knowledge?",
+  answer:
+    "PDF, TXT or Markdown files, pasted text, or a website link. Your information is private and only used for your own account, and you can delete it any time.",
+},
 ];
 
 export default function FAQ() {

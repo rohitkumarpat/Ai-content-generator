@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { prismaclient } from "@/lib/db";
 
+const FREE_LIMIT = 10;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 async function generateWithRag(
@@ -36,6 +38,19 @@ export async function POST(req: Request) {
     const { userId } = await auth();
     if (!userId) {
       return NextResponse.json({ reply: "Unauthorized." }, { status: 401 });
+    }
+    const user = await prismaclient.user.findUnique({
+      where: { clerkid: userId },
+      select: { plan: true },
+    });
+    if (user?.plan !== "PRO") {
+      const used = await prismaclient.aiOutput.count({ where: { clerkid: userId } });
+      if (used >= FREE_LIMIT) {
+        return NextResponse.json(
+          { reply: "Credit limit reached. Please upgrade your plan." },
+          { status: 403 }
+        );
+      }
     }
 
     const { message, templatePrompt, userInput, useKnowledge, slug } =
