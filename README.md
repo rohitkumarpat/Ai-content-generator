@@ -20,11 +20,7 @@ An AI content generation platform with **18 reusable writing tools** (blogs, You
 * 🗄️ PostgreSQL (Neon) with Prisma
 * 🌍 Deployed on Vercel
 
-## 📸 Screenshots
 
-| Knowledge Base | Generation with sources |
-|---|---|
-| ![Knowledge Base](docs/knowledge.png) | ![Sources used](docs/sources.png) |
 
 ## 🛠️ Tech Stack
 
